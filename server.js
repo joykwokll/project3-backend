@@ -43,7 +43,7 @@ const mongoose = require("mongoose");
 const HolidayController = require("./controllers/holidayController")
 
 const app = express();
-const PORT = process.env.PORT ?? 3002
+const PORT = process.env.PORT ?? 3001
 const MONGODB_URI = process.env.MONGODB_URI ?? "mongodb://localhost:27017/holidays"
 
 // Error / Disconnection
