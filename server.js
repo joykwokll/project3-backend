@@ -1,15 +1,10 @@
-// =======================================
-//              DEPENDENCIES
-// =======================================
 require('dotenv').config()
-const log = require("debug")("paper-trading:server")
 const express = require("express");
 const mongoose = require("mongoose");
-const Holiday = require("./models/Holiday")
 const HolidayController = require("./controllers/holidayController")
 
 const app = express();
-const PORT = process.env.PORT ?? 8000;
+const PORT = process.env.PORT ?? 2000
 const MONGODB_URI = process.env.MONGODB_URI ?? "mongodb://localhost:27017/holidays"
 
 // Error / Disconnection
@@ -20,7 +15,7 @@ mongoose.connection.on("disconnected", () => console.log("mongo disconnected"));
 
 //...farther down the page
 
-mongoose.connect("mongodb://localhost:27017/holidays", {
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
 });
 mongoose.connection.once("open", () => {
@@ -29,14 +24,11 @@ mongoose.connection.once("open", () => {
 
 app.use("/api/holidays", HolidayController)
 
-app.use(express.urlencoded({extended:false}));
 
 app.get("/", (req, res) => {
-  res.send("Hello2");
-});
-
-
+    res.send('Hi 2');
+})
 
 app.listen(PORT, () => {
-  console.log("I am listening");
-});
+    console.log(`Server is running on port ${PORT}`);
+})
