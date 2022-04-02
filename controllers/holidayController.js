@@ -82,7 +82,7 @@ router.get('/', (req, res) => {
         res.json(err)
       })
   })
-  
+
 
 //* Create Route
 router.post("/", async (req, res) => {
@@ -94,5 +94,12 @@ router.post("/", async (req, res) => {
     res.status(400).json({ error: error.message });
   };
 });
+
+//* Delete Route
+router.delete("/:id", async (req, res) => {
+    await Holiday.findByIdAndRemove(req.params.id);
+    res.json({ message: "Holiday Deleted" });
+  });
+  
 
 module.exports = router;
